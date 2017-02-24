@@ -27,6 +27,27 @@ module.exports = function(router) {
       });
       return;
     }
+    storage.fectchAllTeams('team')
+    .then (teams => {
+      response.sendJSON(res, 200, teams);
+    })
+    .catch( err => {
+      console.error(err);
+      response.sendText(res, 400, 'bad request');
+    });
+  });
+  router.delete('/api/team', function(req, res) {
+    if (req.url.query.id) {
+      storage.deleteItem('team', req.url.query.id)
+      .then( () => {
+        response.sendText(res, 204, 'file deleted');
+      })
+      .catch( err => {
+        console.error(err);
+        response.sendText(res, 404, 'not found');
+      });
+      return;
+    }
     response.sendText(res, 400, 'bad request');
   });
 };
