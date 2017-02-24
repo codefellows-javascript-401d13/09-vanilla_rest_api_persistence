@@ -36,7 +36,6 @@ describe('Team Routes', function() {
       request.get(`localhost:3000/api/team?id=${testTeam.id}`)
       .end((err, res) => {
         if (err) return done(err);
-        console.log(testTeam);
         expect(res.status).to.equal(200);
         expect(res.body.name).to.equal('Sounders FC');
         expect(res.body.city).to.equal('Seattle, WA');
@@ -53,7 +52,7 @@ describe('Team Routes', function() {
       });
     });
     it('should return a 400 bad request error', function(done) {
-      request.get('localhost:3000/api/team/')
+      request.get('localhost:3000/api/team')
       .end((err, res) => {
         expect(err).to.be.an('error');
         expect(res.status).to.equal(400);
