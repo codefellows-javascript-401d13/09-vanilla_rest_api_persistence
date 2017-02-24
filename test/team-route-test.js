@@ -31,6 +31,7 @@ describe('Team Routes', function() {
       });
     });
   });
+
   describe('GET :3000/api/team', function() {
     it('should retrive a team obj stored in a file', function(done) {
       request.get(`localhost:3000/api/team?id=${testTeam.id}`)
@@ -57,6 +58,47 @@ describe('Team Routes', function() {
         expect(err).to.be.an('error');
         expect(res.status).to.equal(400);
         expect(res.text).to.equal('bad request');
+        done();
+      });
+    });
+  });
+
+  describe('DELETE :3000/api/team', function() {
+    it('should respond with a 204 status'), function(done) {
+      request.delete(`localhost:3000/api/team?id=${testTeam.id}`)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(204);
+        done();
+      });
+    };
+    it('should respond with a 404 error'), function(done) {
+      request.delete('localhost:3000/api/team?id=1234567')
+      .end((err, res) => {
+        expect(err).to.be.an('error');
+        expect(res.status).to.equal(404);
+        expect(res.text).to.equal('not found');
+        done();
+      });
+    };
+    it('should respond with a 400 error'), function(done) {
+      request.delete('localhost:3000/api/team')
+      .end((err, res) => {
+        expect(err).to.be.an('error');
+        expect(res.status).to.equal(400);
+        expect(res.text).to.equal('bad request');
+        done();
+      });
+    };
+  });
+
+  describe('PUT :3000/api/team', function() {
+    it('should respond with a 404 error', function(done) {
+      request.put('localhose:3000/api/team?=*')
+      .end((err, res) => {
+        expect(err).to.be.an('error');
+        expect(res.status).to.equal(404);
+        expect(res.text).to.equal('not found');
         done();
       });
     });
