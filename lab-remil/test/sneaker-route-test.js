@@ -7,18 +7,19 @@ require('../server.js');
 const PORT = process.env.PORT | 3000;
 
 describe('Sneaker Routes', function() {
+  let sneakerArray = [];
   let sneaker = null;
 
-  // describe('GET: unregistered route', function() {
-  //   it('should return a 404 status code', function(done){
-  //     request.get(`localhost:${PORT}/api/notaroute`)
-  //     .end((err, res) => {
-  //       expect(err).to.be.an('error');
-  //       expect(res.status).to.equal(404);
-  //       done();
-  //     });
-  //   });
-  // });
+  describe('GET: unregistered route', function() {
+    it('should return a 404 status code', function(done){
+      request.get(`localhost:${PORT}/api/notaroute`)
+      .end((err, res) => {
+        expect(err).to.be.an('error');
+        expect(res.status).to.equal(404);
+        done();
+      });
+    });
+  });
 
   describe('POST: /api/sneaker', function() {
     it('should return 200 and a sneaker with valid id', function(done) {
@@ -45,45 +46,54 @@ describe('Sneaker Routes', function() {
     });
   });
 
-  // describe('GET: /api/sneaker', function() {
-  //   it('should return 200 and a sneaker with a valid id', function(done) {
-  //     request.get(`localhost:${PORT}/api/sneaker?id=${sneaker.id}`)
-  //     .end((err, res) => {
-  //       if (err) return done(err);
-  //       expect(res.status).to.equal(200);
-  //       expect(res.body.model).to.equal('Air Test 90');
-  //       expect(res.body.brand).to.equal('Testo');
-  //       done();
-  //     });
-  //   });
+  describe('GET: /api/sneaker', function() {
+    it('should return 200 and a sneaker with a valid id', function(done) {
+      request.get(`localhost:${PORT}/api/sneaker?id=${sneaker.id}`)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body.model).to.equal('Air Test 90');
+        expect(res.body.brand).to.equal('Testo');
+        done();
+      });
+    });
 
-    // it('should return a 404 with id not found ', function(done) {
-    //   request.get(`localhost:${PORT}/api/sneaker?id=badID`)
-    //   .end((err, res) => {
-    //     expect(res.status).to.equal(404);
-    //     expect(err).to.be.an('error');
-    //     done();
-    //   });
-    // });
+    it('should return a 404 with id not found ', function(done) {
+      request.get(`localhost:${PORT}/api/sneaker?id=badID`)
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(err).to.be.an('error');
+        done();
+      });
+    });
 
-  //   it('should return a 400 when an id is not provided ', function(done) {
-  //     request.get(`localhost:${PORT}/api/sneaker`)
-  //     .end((err, res) => {
-  //       expect(res.status).to.equal(400);
-  //       expect(err).to.be.an('error');
-  //       done();
-  //     });
-  //   });
-  // });
+    it('should return a 400 when an id is not provided ', function(done) {
+      request.get(`localhost:${PORT}/api/sneaker`)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(err).to.be.an('error');
+        done();
+      });
+    });
+  });
 
-  // describe('DELETE: /api/sneaker', function() {
-  //   it('should return 204', function(done) {
-  //     request.delete(`localhost:${PORT}/api/sneaker?id=${sneaker.id}`)
-  //     .end((err, res) => {
-  //       if (err) return done(err);
-  //       expect(res.status).to.equal(204);
-  //       done();
-  //     });
-  //   });
-  // });
+  describe('DELETE: /api/sneaker', function() {
+    it('should return 204 if provided a valid id', function(done) {
+      request.delete(`localhost:${PORT}/api/sneaker?id=${sneaker.id}`)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(204);
+        done();
+      });
+    });
+
+    it('should return 404 if provided a invalid id', function(done) {
+      request.delete(`localhost:${PORT}/api/sneaker?id=badID`)
+      .end((err, res) => {
+        expect(err).to.be.an('error');
+        expect(res.status).to.equal(404);
+        done();
+      });
+    });
+  });
 });
