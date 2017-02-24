@@ -33,17 +33,18 @@ describe('Team Routes', function() {
   });
   describe('GET :3000/api/team', function() {
     it('should retrive a team obj stored in a file', function(done) {
-      request.get(`localhost:3000/api/team/id=${testTeam.id}`)
+      request.get(`localhost:3000/api/team?id=${testTeam.id}`)
       .end((err, res) => {
         if (err) return done(err);
+        console.log(testTeam);
         expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal(testTeam.name);
-        expect(res.body.city).to.equal(testTeam.city);
+        expect(res.body.name).to.equal('Sounders FC');
+        expect(res.body.city).to.equal('Seattle, WA');
         done();
       });
     });
     it('should return a 404 not found error', function(done) {
-      request.get('localhost:3000/api/team/id=123456')
+      request.get('localhost:3000/api/team?id=123456')
       .end((err, res) => {
         expect(err).to.be.an('error');
         expect(res.status).to.equal(404);
