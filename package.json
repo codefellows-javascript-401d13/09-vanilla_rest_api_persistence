@@ -1,0 +1,28 @@
+{
+  "name": "09-vanilla_rest_api_persistence",
+  "version": "1.0.0",
+  "description": "![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) Lab 09: Persistent Storage\r ===",
+  "main": "note-route.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivprogrammer/09-vanilla_rest_api_persistence.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivprogrammer/09-vanilla_rest_api_persistence/issues"
+  },
+  "homepage": "https://github.com/shivprogrammer/09-vanilla_rest_api_persistence#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "superagent": "^3.5.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "node-uuid": "^1.4.7"
+  }
+}
