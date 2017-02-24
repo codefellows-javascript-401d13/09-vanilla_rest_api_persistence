@@ -15,4 +15,7 @@ module.exports = function(router) {
       response.sendText(res, 400, 'bad request');
     }
   });
+  router.get('/api/team', function(req, res) {
+    
+  });
 };
