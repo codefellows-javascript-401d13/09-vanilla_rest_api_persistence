@@ -7,7 +7,6 @@ require('../server.js');
 const PORT = process.env.PORT | 3000;
 
 describe('Sneaker Routes', function() {
-  let sneakerArray = [];
   let sneaker = null;
 
   describe('GET: unregistered route', function() {
