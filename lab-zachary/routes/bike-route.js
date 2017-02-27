@@ -18,7 +18,13 @@ module.exports = function (router){
       });
       return;
     }
-    writeResponse.sendText(res, 400, 'bad request');
+    storage.fetchAllItems('bike')
+      .then(items => {
+        writeResponse.sendJSON(res, 200, items);
+      }).catch( err => {
+        console.error(err);
+        writeResponse.sendText(res, 404, 'not found');
+      });
   });
 
   router.post(`/api/${itemType}`, function(req, res){

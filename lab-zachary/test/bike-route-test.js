@@ -4,7 +4,7 @@ const request = require ('superagent');
 const expect = require('chai').expect;
 const open = require('fs').openSync;
 
-require('../server.js')
+require('../server.js');
 
 describe('Bike Route Test', function(){
   var bike = '';
@@ -50,11 +50,12 @@ describe('Bike Route Test', function(){
         done();
       });
     });
-    it('should respond w/ \'bad request\' if no id provided', function(done){
+    it('should respond w/ all ids if no id provided', function(done){
       request.get('localhost:8000/api/bike?id=')
       .end((err, res) => {
-        expect(err.message).to.equal('Bad Request');
-        expect(res.status).to.equal(400);
+        if (err) return done(err);
+        expect(res.body.some(e => e ===`${bike.body.id}.json`)).to.equal(true);
+        expect(res.status).to.equal(200);
         done();
       });
     });

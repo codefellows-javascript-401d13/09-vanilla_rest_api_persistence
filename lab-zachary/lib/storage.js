@@ -33,6 +33,23 @@ exports.fetchItem = function(schemaName, id){
   .catch (err => Promise.reject(err));
 };
 
+exports.fetchAllItems = function(schemaName){
+  if(!schemaName) return Promise.reject(new Error('expected schema name'));
+
+  return fs.readdirProm(`${__dirname}/../data/bike`)
+  .then( data => {
+    try{
+      let items = {};
+      for (var key of data.keys()) {
+        items[key] = data[key];
+      }
+      return data;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  })
+  .catch (err => Promise.reject(err));
+};
 exports.deleteItem = function(schemaName, id){
   if(!schemaName) return Promise.reject(new Error('expected schema name'));
   if (!id) return Promise.reject(new Error('expected id'));
