@@ -9,4 +9,4 @@ module.exports = function(name, content) {
   this.id = uuid.v1();
   this.name = name;
   this.content = content;
-}
+};

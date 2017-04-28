@@ -9,16 +9,17 @@ module.exports = function(router) {
     if (req.url.query.id) {
       storage.fetchItem('note', req.url.query.id)
       .then( note => {
-        console.log('whats is good');
+        console.log('word!');
         response.sendJSON(res, 200, note);
       })
       .catch( err => {
+        console.log('nah');
         console.error(err);
         response.sendText(res, 404, 'not found');
       });
 
       return;
-    };
+    }
     response.sendText(res, 400, 'bad request');
   });
 
@@ -30,6 +31,6 @@ module.exports = function(router) {
     } catch (err) {
       console.error(err);
       response.sendText(res, 400, 'bad request');
-    };
+    }
   });
-}
+};

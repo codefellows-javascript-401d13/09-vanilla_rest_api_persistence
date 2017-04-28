@@ -27,8 +27,8 @@ describe('Note Routes', function() {
     it('should return a note', function(done) {
       request.get(`localhost:8000/api/note?id=${note.id}`)
       .end((err, res) => {
-        expect(err).to.be.an('error');
-        // expect(res.status).to.equal(200);
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
         expect(res.body.name).to.equal('test name');
         expect(res.body.content).to.equal('test content');
         done();
